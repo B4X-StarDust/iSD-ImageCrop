@@ -1,0 +1,108 @@
+﻿Build1=Default,it.tecnomedia.cropview
+File1=image0.jpg
+File2=Layout1.bil
+FileGroup1=Default Group
+FileGroup2=Default Group
+Group=Default Group
+Library1=icore
+Library2=ixui
+Library3=ibitmapcreator
+Module1=ImageViewCrop
+NumberOfFiles=2
+NumberOfLibraries=3
+NumberOfModules=1
+Version=5.3
+@EndOfDesignText@
+'Code module
+#Region  Project Attributes 
+	#ApplicationLabel: Cropped
+	#Version: 1.0.0 
+	'Orientation possible values: Portrait, LandscapeLeft, LandscapeRight and PortraitUpsideDown
+	#iPhoneOrientations: Portrait, LandscapeLeft, LandscapeRight
+	#iPadOrientations: Portrait, LandscapeLeft, LandscapeRight, PortraitUpsideDown
+	#Target: iPhone, iPad
+	#ATSEnabled: True
+	#MinVersion: 7
+	
+'	#If DEBUG
+	   #CertificateFile: ios_developement.cer
+	   #ProvisionFile: Developement.mobileprovision
+'	#ELSE If RELEASE
+'	   #CertificateFile: ios_distribution.cer
+'	   #ProvisionFile: distribution.mobileprovision
+'	#END IF
+	
+	#LibraryAuthor: Star-Dust
+	#LibraryName: iSD_ImageCrop
+	#LibraryVersion: 0.10
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'Public variables can be accessed from all modules.
+	Public App As Application
+	Public NavControl As NavigationController
+	Private Page1 As Page
+
+	Private ImageViewCrop1 As ImageViewCrop
+	Private ImageView1 As ImageView
+End Sub
+
+Private Sub Application_Start (Nav As NavigationController)
+	'SetDebugAutoFlushLogs(True) 'Uncomment if program crashes before all logs are printed.
+	NavControl = Nav
+	Page1.Initialize("Page1")
+	Page1.Title = "Page 1"
+	Page1.RootPanel.Color = Colors.White
+	NavControl.ShowPage(Page1)
+	Page1.RootPanel.LoadLayout("Layout1")
+	ImageViewCrop1.Bitmap=LoadBitmap(File.DirAssets, "image0.jpg")
+End Sub
+
+Private Sub Page1_Resize(Width As Int, Height As Int)
+	
+End Sub
+
+Private Sub Application_Background
+	
+End Sub
+
+Sub ImageViewCrop1_Cropped
+	Dim Bm As Bitmap = ImageViewCrop1.GetCroppedBitmap
+	ImageView1.Bitmap=Bm
+	ImageView1.Width=Bm.Width / 2
+	ImageView1.Height=Bm.Height / 2
+End Sub
+
+Sub ButtonCircled_Click
+	ImageViewCrop1.Crop="Circle"
+End Sub
+
+Sub ButtonSquared_Click
+	ImageViewCrop1.Crop="Square"
+End Sub
+
+Sub ButtonEllipse_Click
+	ImageViewCrop1.Crop="Ellipse"
+End Sub
+
+Sub ButtonStar_Click
+	ImageViewCrop1.Crop="Star"
+End Sub
+
+Sub ButtonZoom100_Click
+	ImageViewCrop1.activeZoomImage
+End Sub
+
+Sub ButtonMove_Click
+	ImageViewCrop1.activeMoveImage
+End Sub
+
+Sub ButtonRotation_Click
+	ImageViewCrop1.activeRotateImage
+End Sub
+
+Sub ButtonReset_Click
+	ImageViewCrop1.Rotation=0
+	ImageViewCrop1.ResetZoom
+End Sub
