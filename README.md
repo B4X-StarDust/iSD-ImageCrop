@@ -5,4 +5,4 @@ Un piccolo codice, forse un pò ingrarbugliato (è stata la mia prima libreria i
 Spero sia utile a qualcuno
 
 
-https://github.com/B4X-StarDust/iSD-ImageCrop/blob/main/Video%202.gif
+<img url="https://github.com/B4X-StarDust/iSD-ImageCrop/blob/main/Video%202.gif">
